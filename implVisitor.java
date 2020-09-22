@@ -58,20 +58,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenthesis(implParser.ParenthesisContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Multiplication}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMultiplication(implParser.MultiplicationContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Addition}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAddition(implParser.AdditionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -79,12 +65,12 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(implParser.VariableContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Subtraction}
+	 * Visit a parse tree produced by the {@code AdditionSubtraction}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubtraction(implParser.SubtractionContext ctx);
+	T visitAdditionSubtraction(implParser.AdditionSubtractionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Constant}
 	 * labeled alternative in {@link implParser#expr}.
@@ -93,12 +79,12 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConstant(implParser.ConstantContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Division}
+	 * Visit a parse tree produced by the {@code MultiplicationDivision}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDivision(implParser.DivisionContext ctx);
+	T visitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Unequal}
 	 * labeled alternative in {@link implParser#condition}.

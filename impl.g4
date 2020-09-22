@@ -13,14 +13,16 @@ command : x=ID '=' e=expr ';'	         # Assignment
         | 'while' '('c=condition')' p=program  # WhileLoop
 	;
 	
-expr	: e1=expr '*' e2=expr # Multiplication
-	| e1=expr '/' e2=expr # Division
-	| e1=expr '+' e2=expr # Addition
-	| e1=expr '-' e2=expr # Subtraction
-	| c=FLOAT     	      # Constant
-	| x=ID		      # Variable
-	| '(' e=expr ')'      # Parenthesis
-	;
+expr	: e1=expr op=MULDIV e2=expr # MultiplicationDivision
+		| e1=expr op=ADDSUB e2=expr # AdditionSubtraction
+		| c=FLOAT     	      # Constant
+		| x=ID		      # Variable
+		| '(' e=expr ')'      # Parenthesis
+		;
+
+MULDIV  :	('*' | '/');
+ADDSUB :	('+' | '-');
+
 
 condition : e1=expr '!=' e2=expr # Unequal
 	  // ... extend me 
