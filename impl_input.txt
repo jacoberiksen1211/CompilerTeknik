@@ -1,5 +1,6 @@
 /* Example program for the imperative language impl */
 
+/*
 n=5;
 result=1;
 while(n!=0){
@@ -8,4 +9,21 @@ while(n!=0){
 }
 
 output result;
+*/
 
+
+// muldiv før addsub test
+// output 1+3*2;
+
+//conditions
+
+n=2;
+if (n==1) {
+	output 1.0;
+} else if (n==2) {
+	output 2.0;
+} else if (n==3) {
+	output 3.0;
+} else {
+	output 4.0;
+}

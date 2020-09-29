@@ -51,6 +51,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhileLoop(implParser.WhileLoopContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code IfStatement}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(implParser.IfStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Parenthesis}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -86,10 +93,45 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ElseIfStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseIfStatement(implParser.ElseIfStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ElseStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseStatement(implParser.ElseStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Unequal}
 	 * labeled alternative in {@link implParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitUnequal(implParser.UnequalContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Equal}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEqual(implParser.EqualContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code And}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAnd(implParser.AndContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Or}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOr(implParser.OrContext ctx);
 }

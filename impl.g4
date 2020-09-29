@@ -11,6 +11,7 @@ program     : c=command                      # SingleCommand
 command     : x=ID '=' e=expr ';'	         # Assignment
 	        | 'output' e=expr ';'            # Output
             | 'while' '('c=condition')' p=program  # WhileLoop
+			| 'if' '('c=condition')' p=program b=branch? # IfStatement
 	        ;
 	
 expr	    : e1=expr op=MULDIV e2=expr # MultiplicationDivision
@@ -20,13 +21,19 @@ expr	    : e1=expr op=MULDIV e2=expr # MultiplicationDivision
 		    | '(' e=expr ')'      # Parenthesis
 		    ;
 
-MULDIV      :	('*' | '/');
-ADDSUB      :	('+' | '-');
+branch		: 'elseif' '('c=condition')' p=program b=branch? #ElseIfStatement
+			| 'else' p=program #ElseStatement
+			;
 
 
 condition   : e1=expr '!=' e2=expr # Unequal
-	        // ... extend me 
+			| e1=expr '==' e2=expr # Equal
+			| e1=expr '&&' e2=expr # And
+			| e1=expr '||' e2=expr # Or
 	        ;  
+
+MULDIV      :	('*' | '/');
+ADDSUB      :	('+' | '-');
 
 ID          : ALPHA (ALPHA|NUM)* ;
 FLOAT       : '-'? NUM+ ('.' NUM+)? ;

@@ -77,6 +77,18 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitWhileLoop(implParser.WhileLoopContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code IfStatement}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(implParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IfStatement}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(implParser.IfStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Parenthesis}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -137,6 +149,30 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ElseIfStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseIfStatement(implParser.ElseIfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ElseIfStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseIfStatement(implParser.ElseIfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ElseStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseStatement(implParser.ElseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ElseStatement}
+	 * labeled alternative in {@link implParser#branch}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseStatement(implParser.ElseStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Unequal}
 	 * labeled alternative in {@link implParser#condition}.
 	 * @param ctx the parse tree
@@ -148,4 +184,40 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUnequal(implParser.UnequalContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Equal}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterEqual(implParser.EqualContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Equal}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitEqual(implParser.EqualContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code And}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnd(implParser.AndContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code And}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnd(implParser.AndContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Or}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterOr(implParser.OrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Or}
+	 * labeled alternative in {@link implParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitOr(implParser.OrContext ctx);
 }
