@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.7.1
+// Generated from impl.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class implParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -21,18 +21,27 @@ public class implParser extends Parser {
 		COMMENT=17, COMMENT2=18;
 	public static final int
 		RULE_start = 0, RULE_program = 1, RULE_command = 2, RULE_expr = 3, RULE_condition = 4;
-	public static final String[] ruleNames = {
-		"start", "program", "command", "expr", "condition"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"start", "program", "command", "expr", "condition"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, "'{'", "'}'", "'='", "';'", "'output'", "'while'", "'('", "')'", 
-		"'!='"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, "MULDIV", 
-		"ADDSUB", "ID", "FLOAT", "ALPHA", "NUM", "WHITESPACE", "COMMENT", "COMMENT2"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'{'", "'}'", "'='", "';'", "'output'", "'while'", "'('", "')'", 
+			"'!='"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, null, null, null, null, null, null, null, null, null, "MULDIV", 
+			"ADDSUB", "ID", "FLOAT", "ALPHA", "NUM", "WHITESPACE", "COMMENT", "COMMENT2"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -82,6 +91,7 @@ public class implParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
 	public static class StartContext extends ParserRuleContext {
 		public CommandContext command;
 		public List<CommandContext> cs = new ArrayList<CommandContext>();
