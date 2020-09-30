@@ -1,0 +1,3 @@
+//muldiv before addsub test
+
+output 1+3*2;

@@ -78,16 +78,20 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return null;
     }
 
+	// While loop
+	//// Checks if the condition is not false, and executes the associated program.
     public Double visitWhileLoop(implParser.WhileLoopContext ctx){
-		while(visit(ctx.c).equals(1.0)){
+		while(visit(ctx.c) != 0.0){
 	  	  visit(ctx.p);
 		}
 
 		return null;
     }
 
+	// Branch: if
+	//// Checks if the condition is not false, and executes the program. If another branch is parsed (elseif or else), execute that.
  	public Double visitIfStatement(implParser.IfStatementContext ctx){
-		if(visit(ctx.c).equals(1.0)){
+		if(visit(ctx.c) != 0.0){
 			visit(ctx.p);
 			return null;
 		} else {
@@ -98,17 +102,25 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return null;
     }
     
+    // Branch: elseif
+    //// Checks if the condition is not false, and executes the program. If another branch is parsed (elseif or else), execute that.
+    //// While identical to the if branch, it was required to split them into two in order to enable the parser to not allow an elseif outside an if branch.
 	public Double visitElseIfStatement(implParser.ElseIfStatementContext ctx){
-		if(visit(ctx.c).equals(1.0)){
+		if(visit(ctx.c) != 0.0){
 			visit(ctx.p);
 			return null;
 		} else {
-			visit(ctx.b);
+			if (ctx.b != null)
+				visit(ctx.b);
 		}
 
 		return null;
     }
 
+
+	// Branch: else
+	//// Executes the program following it.
+	//// Due to the design of the syntax analysis, the else branch always follows either an if or an elseif branch.
 	public Double visitElseStatement(implParser.ElseStatementContext ctx){
 		visit(ctx.p);
 
@@ -121,6 +133,16 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     
     public Double visitVariable(implParser.VariableContext ctx){
 		return env.getVariable(ctx.x.getText());
+    };
+    
+    // Negative floats
+    //// Needs to be handled as expressions when parsing, or its prone to errors.
+    //// Subsequently, the standard grammar file has had the FLOAT definition changed, so the optional minus has been removed.
+    public Double visitNegative(implParser.NegativeContext ctx){
+		if (ctx.op.getText().equals("+"))
+			return visit(ctx.e);
+		else
+			return -visit(ctx.e);
     };
     
     public Double visitAdditionSubtraction(implParser.AdditionSubtractionContext ctx){
@@ -141,41 +163,81 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return Double.parseDouble(ctx.c.getText()); 
     };
 
-    public Double visitUnequal(implParser.UnequalContext ctx){
-		Double v1=visit(ctx.e1);
-		Double v2=visit(ctx.e2);
-		if (v1.equals(v2))  
-			return 0.0;
-		else 
+	// Logical NOT
+	//// ! converts the following expression to a boolean and inverts it.
+	//// According to our below definition, NOT here simply checks if the value is 0.0 (false) and returns 1.0 (true) if it is. And the other way around.
+	public Double visitLogiNot(implParser.LogiNotContext ctx){
+		double e=visit(ctx.e);
+		if (e == 0.0)
 			return 1.0;
-    };
-
-	public Double visitEqual(implParser.EqualContext ctx){
-		Double v1=visit(ctx.e1);
-		Double v2=visit(ctx.e2);
-		if (v1.equals(v2))  
-			return 1.0;
-		else 
+		else
 			return 0.0;
 	};
+	
 
-	public Double visitAnd(implParser.AndContext ctx){
-		Double v1=visit(ctx.e1);
-		Double v2=visit(ctx.e2);
-		if (v1.equals(1.0) && v2.equals(1.0))
+	// Logical AND
+	//// && needs to check both expressions are true.
+	//// In case of values, as long as they have a value that isnt 0 (null), they should return 1.0 (true).
+	//// While &&'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
+	public Double visitLogiAnd(implParser.LogiAndContext ctx){
+		double e1=visit(ctx.e1);
+		double e2=visit(ctx.e2);
+		if (e1 != 0.0 && e2 != 0.0)
 			return 1.0;
 		else
 			return 0.0;
 	};
 
-	public Double visitOr(implParser.OrContext ctx) {
-		Double v1=visit(ctx.e1);
-		Double v2=visit(ctx.e2);
-		if (v1.equals(1.0) || v2.equals(1.0))
+	// Logical OR
+	//// || needs to check if one of the expressions are true, and then return true.
+	//// In case of values, as long as one has a value that isnt 0 (null), they should return 1.0 (true).
+	//// While ||'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
+	public Double visitLogiOr(implParser.LogiOrContext ctx) {
+		double e1=visit(ctx.e1);
+		double e2=visit(ctx.e2);
+		if (e1 != 0.0 || e2 != 0.0)
 			return 1.0;
 		else
 			return 0.0;
-
+	};
+	
+	// Various Conditional Operators
+	// These are handled seperately to the logical AND and OR, as we need to make sure the order of comparison is correct in our grammar (Thanks top-down ANTLR parsing).
+	//// Returns 1.0 if condition is true, and 0.0 if condition is false.
+	public Double visitCondOp(implParser.CondOpContext ctx) {
+		double e1 = visit(ctx.e1);
+		double e2 = visit(ctx.e2);
+	
+		switch(ctx.op.getText()) {
+			case "==":
+				if (e1 == e2)
+					return 1.0;
+				break;
+			case "!=":
+				if (e1 != e2)
+					return 1.0;
+				break;
+			case "<=":
+				if (e1 <= e2)
+					return 1.0;
+				break;
+			case ">=":
+				if (e1 >= e2)
+					return 1.0;
+				break;
+			case "<":
+				if (e1 < e2)
+					return 1.0;
+				break;
+			case ">":
+				if (e1 > e2)
+					return 1.0;
+				break;
+			default:
+				return 0.0;
+		}
+		
+		return 0.0;
 	};
 
 }

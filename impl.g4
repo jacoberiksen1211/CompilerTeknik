@@ -4,39 +4,38 @@ grammar impl;
 
 start       :  cs+=command* EOF ;
 
-program     : c=command                      # SingleCommand
-	        | '{' cs+=command* '}'           # MultipleCommands
+program     : c=command               	# SingleCommand
+	        | '{' cs+=command* '}'   	# MultipleCommands
 	        ;
 	
-command     : x=ID '=' e=expr ';'	         # Assignment
-	        | 'output' e=expr ';'            # Output
-            | 'while' '('c=condition')' p=program  # WhileLoop
-			| 'if' '('c=condition')' p=program b=branch? # IfStatement
+command     : x=ID '=' e=expr ';'	         		# Assignment
+	        | 'output' e=expr ';'            		# Output
+            | 'while' '('c=expr')' p=program  		# WhileLoop
+			| 'if' '('c=expr')' p=program b=branch? # IfStatement
 	        ;
 	
-expr	    : e1=expr op=MULDIV e2=expr # MultiplicationDivision
+expr	    : '!' e=expr #LogiNot
+			| e1=expr op=MULDIV e2=expr # MultiplicationDivision
 		    | e1=expr op=ADDSUB e2=expr # AdditionSubtraction
-		    | c=FLOAT     	      # Constant
-		    | x=ID		      # Variable
-		    | '(' e=expr ')'      # Parenthesis
+		    | op=ADDSUB e=expr 	 		# Negative
+		    | c=FLOAT     	      		# Constant
+		    | x=ID		      			# Variable
+		    | e1=expr op=CONDOP e2=expr # CondOp
+			| e1=expr '&&' e2=expr 		# LogiAnd
+			| e1=expr '||' e2=expr 		# LogiOr
+		    | '(' e=expr ')'      		# Parenthesis
 		    ;
 
-branch		: 'elseif' '('c=condition')' p=program b=branch? #ElseIfStatement
-			| 'else' p=program #ElseStatement
+branch		: 'elseif' '('c=expr')' p=program b=branch? #ElseIfStatement
+			| 'else' p=program 							#ElseStatement
 			;
 
-
-condition   : e1=expr '!=' e2=expr # Unequal
-			| e1=expr '==' e2=expr # Equal
-			| e1=expr '&&' e2=expr # And
-			| e1=expr '||' e2=expr # Or
-	        ;  
-
-MULDIV      :	('*' | '/');
-ADDSUB      :	('+' | '-');
+MULDIV      : ('*' | '/');
+ADDSUB      : ('+' | '-');
+CONDOP		: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 
 ID          : ALPHA (ALPHA|NUM)* ;
-FLOAT       : '-'? NUM+ ('.' NUM+)? ;
+FLOAT       : NUM+ ('.' NUM+)? ;
 
 ALPHA       : [a-zA-Z_ÆØÅæøå] ;
 NUM         : [0-9] ;

@@ -99,6 +99,18 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLogiNot(implParser.LogiNotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogiNot(implParser.LogiNotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParenthesis(implParser.ParenthesisContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -118,6 +130,30 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariable(implParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegative(implParser.NegativeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegative(implParser.NegativeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogiOr(implParser.LogiOrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogiOr(implParser.LogiOrContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -147,6 +183,18 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCondOp(implParser.CondOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCondOp(implParser.CondOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMultiplicationDivision(implParser.MultiplicationDivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -154,6 +202,18 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogiAnd(implParser.LogiAndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogiAnd(implParser.LogiAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -178,54 +238,6 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElseStatement(implParser.ElseStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUnequal(implParser.UnequalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUnequal(implParser.UnequalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEqual(implParser.EqualContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEqual(implParser.EqualContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAnd(implParser.AndContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAnd(implParser.AndContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOr(implParser.OrContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOr(implParser.OrContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
