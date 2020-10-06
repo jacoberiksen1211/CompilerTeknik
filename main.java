@@ -70,6 +70,15 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 
 		return null;
     }
+
+    public Double visitArrayAssignment(implParser.ArrayAssignmentContext ctx){
+ 		//set v value from expression 2
+ 		Double v=visit(ctx.e2);
+ 		//make variable: name = "ID[expression1]" , value = v
+		env.setVariable(ctx.id.getText()+"[" + visit(ctx.e1) + "]",v);
+
+		return null;
+    }
     
     public Double visitOutput(implParser.OutputContext ctx){
 		Double v=visit(ctx.e);
@@ -86,6 +95,24 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		}
 
 		return null;
+    }
+
+    public Double visitForLoop(implParser.ForLoopContext ctx){
+		//for loops syntax is as the following:
+		//for(command1; condition; command2;){prog}
+    	
+    	//run command1 first and only once
+    	visit(ctx.c1);
+    	
+    	//while loop running untill condition fails 
+    	while(visit(ctx.c2) == 1.0){
+    		//run program
+    		visit(ctx.p);
+    		//run command2
+    		visit(ctx.c3);
+    	}
+
+    	return null;
     }
 
 	// Branch: if
@@ -137,6 +164,11 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     
     public Double visitVariable(implParser.VariableContext ctx){
 		return env.getVariable(ctx.x.getText());
+    };
+
+    public Double visitArrayVariable(implParser.ArrayVariableContext ctx){
+		
+		return env.getVariable(ctx.id.getText()+"["+visit(ctx.e)+"]");
     };
     
     // Negative floats

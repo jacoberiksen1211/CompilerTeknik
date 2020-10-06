@@ -41,6 +41,18 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitMultipleCommands(implParser.MultipleCommandsContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ArrayAssignment}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAssignment(implParser.ArrayAssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArrayAssignment}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAssignment(implParser.ArrayAssignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Assignment}
 	 * labeled alternative in {@link implParser#command}.
 	 * @param ctx the parse tree
@@ -76,6 +88,18 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhileLoop(implParser.WhileLoopContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ForLoop}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void enterForLoop(implParser.ForLoopContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ForLoop}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void exitForLoop(implParser.ForLoopContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code IfStatement}
 	 * labeled alternative in {@link implParser#command}.
@@ -208,6 +232,18 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConstant(implParser.ConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ArrayVariable}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayVariable(implParser.ArrayVariableContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArrayVariable}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayVariable(implParser.ArrayVariableContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code MultiplicationDivision}
 	 * labeled alternative in {@link implParser#expr}.

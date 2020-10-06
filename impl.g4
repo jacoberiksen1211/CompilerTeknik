@@ -8,9 +8,11 @@ program		: c=command                 # SingleCommand
 			| '{' cs+=command* '}'      # MultipleCommands
 			;
 	
-command		: x=ID '=' e=expr ';'                   # Assignment
+command		: id=ID '[' e1=expr ']' '=' e2=expr ';' # ArrayAssignment
+			| x=ID '=' e=expr ';'                   # Assignment
 			| 'output' e=expr ';'                   # Output
-			| 'while' '('c=expr')' p=program        # WhileLoop
+			| 'while' '('c=cond')' p=program        # WhileLoop
+			| 'for' '(' c1=command  c2=cond ';' c3=command')' p=program #ForLoop
 			| 'if' '('c=cond')' p=program b=branch? # IfStatement
 			;
 	
@@ -27,6 +29,7 @@ expr		: e1=expr op=MULDIV e2=expr # MultiplicationDivision
 			| e1=expr op=ADDSUB e2=expr # AdditionSubtraction
 			| op=ADDSUB e=expr          # Negative
 			| c=FLOAT                   # Constant
+			| id=ID '[' e=expr ']'		# ArrayVariable
 			| x=ID                      # Variable			
 			| '(' e=expr ')'            # Parenthesis
 			;
@@ -35,11 +38,13 @@ branch		: 'elseif' '('c=cond')' p=program b=branch? #ElseIfStatement
 			| 'else' p=program                          #ElseStatement
 			;
 
+
 MULDIV		: ('*' | '/');
 ADDSUB		: ('+' | '-');
 CONDOP		: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 
 ID			: ALPHA (ALPHA|NUM)* ;
+
 FLOAT		: NUM+ ('.' NUM+)? ;
 
 ALPHA		: [a-zA-Z_] ;

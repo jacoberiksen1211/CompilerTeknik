@@ -30,6 +30,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultipleCommands(implParser.MultipleCommandsContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ArrayAssignment}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayAssignment(implParser.ArrayAssignmentContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Assignment}
 	 * labeled alternative in {@link implParser#command}.
 	 * @param ctx the parse tree
@@ -50,6 +57,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhileLoop(implParser.WhileLoopContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ForLoop}
+	 * labeled alternative in {@link implParser#command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForLoop(implParser.ForLoopContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code IfStatement}
 	 * labeled alternative in {@link implParser#command}.
@@ -127,6 +141,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitConstant(implParser.ConstantContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArrayVariable}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayVariable(implParser.ArrayVariableContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MultiplicationDivision}
 	 * labeled alternative in {@link implParser#expr}.
