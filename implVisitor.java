@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.8
+// Generated from impl.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -59,11 +59,39 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	T visitIfStatement(implParser.IfStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code LogiNot}
-	 * labeled alternative in {@link implParser#expr}.
+	 * labeled alternative in {@link implParser#cond}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLogiNot(implParser.LogiNotContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LogiOr}
+	 * labeled alternative in {@link implParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogiOr(implParser.LogiOrContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CondOp}
+	 * labeled alternative in {@link implParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondOp(implParser.CondOpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CondParenthesis}
+	 * labeled alternative in {@link implParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondParenthesis(implParser.CondParenthesisContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LogiAnd}
+	 * labeled alternative in {@link implParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogiAnd(implParser.LogiAndContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Parenthesis}
 	 * labeled alternative in {@link implParser#expr}.
@@ -86,13 +114,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNegative(implParser.NegativeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code LogiOr}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLogiOr(implParser.LogiOrContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code AdditionSubtraction}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -107,26 +128,12 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConstant(implParser.ConstantContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code CondOp}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCondOp(implParser.CondOpContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code MultiplicationDivision}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code LogiAnd}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLogiAnd(implParser.LogiAndContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ElseIfStatement}
 	 * labeled alternative in {@link implParser#branch}.

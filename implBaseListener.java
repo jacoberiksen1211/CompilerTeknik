@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.8
+// Generated from impl.g4 by ANTLR 4.7.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -111,6 +111,54 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLogiOr(implParser.LogiOrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogiOr(implParser.LogiOrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCondOp(implParser.CondOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCondOp(implParser.CondOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCondParenthesis(implParser.CondParenthesisContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCondParenthesis(implParser.CondParenthesisContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogiAnd(implParser.LogiAndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogiAnd(implParser.LogiAndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParenthesis(implParser.ParenthesisContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -147,18 +195,6 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogiOr(implParser.LogiOrContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLogiOr(implParser.LogiOrContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAdditionSubtraction(implParser.AdditionSubtractionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -183,18 +219,6 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCondOp(implParser.CondOpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCondOp(implParser.CondOpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMultiplicationDivision(implParser.MultiplicationDivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,18 +226,6 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLogiAnd(implParser.LogiAndContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLogiAnd(implParser.LogiAndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

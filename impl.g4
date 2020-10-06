@@ -11,22 +11,27 @@ program		: c=command                 # SingleCommand
 command		: x=ID '=' e=expr ';'                   # Assignment
 			| 'output' e=expr ';'                   # Output
 			| 'while' '('c=expr')' p=program        # WhileLoop
-			| 'if' '('c=expr')' p=program b=branch? # IfStatement
+			| 'if' '('c=cond')' p=program b=branch? # IfStatement
 			;
 	
-expr		: '!' e=expr #LogiNot
-			| e1=expr op=MULDIV e2=expr # MultiplicationDivision
+			
+
+cond 		: '!' c=cond 				# LogiNot
+			| c1=cond '&&' c2=cond 		# LogiAnd
+			| c1=cond '||' c2=cond      # LogiOr
+			| e1=expr op=CONDOP e2=expr # CondOp
+			| '(' c=cond ')'            # CondParenthesis
+			;
+
+expr		: e1=expr op=MULDIV e2=expr # MultiplicationDivision
 			| e1=expr op=ADDSUB e2=expr # AdditionSubtraction
 			| op=ADDSUB e=expr          # Negative
 			| c=FLOAT                   # Constant
-			| x=ID                      # Variable
-			| e1=expr op=CONDOP e2=expr # CondOp
-			| e1=expr '&&' e2=expr      # LogiAnd
-			| e1=expr '||' e2=expr      # LogiOr
+			| x=ID                      # Variable			
 			| '(' e=expr ')'            # Parenthesis
 			;
 
-branch		: 'elseif' '('c=expr')' p=program b=branch? #ElseIfStatement
+branch		: 'elseif' '('c=cond')' p=program b=branch? #ElseIfStatement
 			| 'else' p=program                          #ElseStatement
 			;
 
@@ -37,7 +42,7 @@ CONDOP		: ('==' | '!=' | '<' | '>' | '<=' | '>=');
 ID			: ALPHA (ALPHA|NUM)* ;
 FLOAT		: NUM+ ('.' NUM+)? ;
 
-ALPHA		: [a-zA-Z_ÆØÅæøå] ;
+ALPHA		: [a-zA-Z_] ;
 NUM			: [0-9] ;
 
 WHITESPACE	: [ \n\t\r]+ -> skip;

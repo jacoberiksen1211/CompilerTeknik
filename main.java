@@ -130,6 +130,10 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     public Double visitParenthesis(implParser.ParenthesisContext ctx){
 		return visit(ctx.e);
     };
+
+    public Double visitCondParenthesis(implParser.CondParenthesisContext ctx){
+		return visit(ctx.c);
+    };
     
     public Double visitVariable(implParser.VariableContext ctx){
 		return env.getVariable(ctx.x.getText());
@@ -167,22 +171,21 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	//// ! converts the following expression to a boolean and inverts it.
 	//// According to our below definition, NOT here simply checks if the value is 0.0 (false) and returns 1.0 (true) if it is. And the other way around.
 	public Double visitLogiNot(implParser.LogiNotContext ctx){
-		double e=visit(ctx.e);
-		if (e == 0.0)
+		double c=visit(ctx.c);
+		if (c == 0.0)
 			return 1.0;
 		else
 			return 0.0;
 	};
 	
-
 	// Logical AND
 	//// && needs to check both expressions are true.
 	//// In case of values, as long as they have a value that isnt 0 (null), they should return 1.0 (true).
 	//// While &&'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
 	public Double visitLogiAnd(implParser.LogiAndContext ctx){
-		double e1=visit(ctx.e1);
-		double e2=visit(ctx.e2);
-		if (e1 != 0.0 && e2 != 0.0)
+		double c1=visit(ctx.c1);
+		double c2=visit(ctx.c2);
+		if ((c1 == 1.0) && (c2 == 1.0))
 			return 1.0;
 		else
 			return 0.0;
@@ -193,9 +196,9 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	//// In case of values, as long as one has a value that isnt 0 (null), they should return 1.0 (true).
 	//// While ||'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
 	public Double visitLogiOr(implParser.LogiOrContext ctx) {
-		double e1=visit(ctx.e1);
-		double e2=visit(ctx.e2);
-		if (e1 != 0.0 || e2 != 0.0)
+		double c1=visit(ctx.c1);
+		double c2=visit(ctx.c2);
+		if ((c1 == 1.0) || (c2 == 1.0))
 			return 1.0;
 		else
 			return 0.0;
