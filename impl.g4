@@ -28,7 +28,6 @@ cond        : '!' c=cond                # LogiNot
 expr        : op=ADDSUB e=expr          # Negative
 			| e1=expr op=MULDIV e2=expr # MultiplicationDivision
             | e1=expr op=ADDSUB e2=expr # AdditionSubtraction
-            | op=ADDSUB e=expr          # Negative
             | c=FLOAT                   # Constant
             | id=ID '[' e=expr ']'      # ArrayVariable
             | x=ID                      # Variable
