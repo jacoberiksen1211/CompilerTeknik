@@ -97,14 +97,14 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return null;
     }
 
-    public Double visitForLoop(implParser.ForLoopContext ctx){
-		//for loops syntax is as the following:
-		//for(command1; condition; command2;){prog}
-    	
+	// For loops
+	//// Implemented in sort of the syntax of java:
+	//// for(command1; condition; command2;){prog}
+    public Double visitForLoop(implParser.ForLoopContext ctx){    	
     	//run command1 first and only once
     	visit(ctx.c1);
     	
-    	//while loop running untill condition fails 
+    	//while loop running until condition is false
     	while(visit(ctx.c2) == 1.0){
     		//run program
     		visit(ctx.p);
@@ -144,7 +144,6 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return null;
     }
 
-
 	// Branch: else
 	//// Executes the program following it.
 	//// Due to the design of the syntax analysis, the else branch always follows either an if or an elseif branch.
@@ -154,10 +153,12 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 		return null;
     }
 
+	// parenthesis around a condition, such as after an if statement.
     public Double visitParenthesis(implParser.ParenthesisContext ctx){
 		return visit(ctx.e);
     };
 
+	// parenthesis around an expression, to indicate it to be evaluated seperately.
     public Double visitCondParenthesis(implParser.CondParenthesisContext ctx){
 		return visit(ctx.c);
     };
@@ -165,9 +166,9 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     public Double visitVariable(implParser.VariableContext ctx){
 		return env.getVariable(ctx.x.getText());
     };
-
+    
+    // same as the regular visitvariable, but this evaluate the expression in the brackets before saving it to the environment hashmap as a whole.
     public Double visitArrayVariable(implParser.ArrayVariableContext ctx){
-		
 		return env.getVariable(ctx.id.getText()+"["+visit(ctx.e)+"]");
     };
     
@@ -181,6 +182,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 			return -visit(ctx.e);
     };
     
+    // Addition and Subraction arithmetics
     public Double visitAdditionSubtraction(implParser.AdditionSubtractionContext ctx){
 		if (ctx.op.getText().equals("+"))
 			return visit(ctx.e1) + visit(ctx.e2);
@@ -188,6 +190,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 			return visit(ctx.e1) - visit(ctx.e2);
     };
 
+	// Multiplication and Division arithmetics
     public Double visitMultiplicationDivision(implParser.MultiplicationDivisionContext ctx){
 		if (ctx.op.getText().equals("*"))
 			return visit(ctx.e1) * visit(ctx.e2);
@@ -200,8 +203,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
     };
 
 	// Logical NOT
-	//// ! converts the following expression to a boolean and inverts it.
-	//// According to our below definition, NOT here simply checks if the value is 0.0 (false) and returns 1.0 (true) if it is. And the other way around.
+	//// ! inverts the following conditions bool value.
 	public Double visitLogiNot(implParser.LogiNotContext ctx){
 		double c=visit(ctx.c);
 		if (c == 0.0)
@@ -211,9 +213,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	};
 	
 	// Logical AND
-	//// && needs to check both expressions are true.
-	//// In case of values, as long as they have a value that isnt 0 (null), they should return 1.0 (true).
-	//// While &&'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
+	//// && needs to check both conditions compared are true
 	public Double visitLogiAnd(implParser.LogiAndContext ctx){
 		double c1=visit(ctx.c1);
 		double c2=visit(ctx.c2);
@@ -224,9 +224,7 @@ class Interpreter extends AbstractParseTreeVisitor<Double> implements implVisito
 	};
 
 	// Logical OR
-	//// || needs to check if one of the expressions are true, and then return true.
-	//// In case of values, as long as one has a value that isnt 0 (null), they should return 1.0 (true).
-	//// While ||'ing two constants in java isn't allowed, we anyways decided to check if the value simply exists instead (c/cpp style).
+	//// || needs to check if one of the conditions compared are true
 	public Double visitLogiOr(implParser.LogiOrContext ctx) {
 		double c1=visit(ctx.c1);
 		double c2=visit(ctx.c2);
