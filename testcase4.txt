@@ -1,0 +1,19 @@
+// forloop test
+// expected result: for loop breaks when a > 14, and value is 16. if true, output 1.0
+
+a = 1;
+
+for ( i = 0 ; i < 5; i = i + 1 ; ){
+	a = a + a ;
+	if(a > 14){
+		i = 1000; //break
+	}
+}
+
+
+// result checker
+if (a == 16) {
+	output 1.0;
+} else {
+	output 0.0;
+}

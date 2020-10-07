@@ -1,5 +1,6 @@
 /* Example program for impl that tests many the features required in
 the assignment */
+// note that for loops are changed from original file to support our java style syntax
 
 n=49;
 k=6;

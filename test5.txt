@@ -1,8 +1,0 @@
-// array test
-
-a[1] = 1;		//set a[1] to 1
-a[2] = a[1] + 2;	//set a[2] to 3
-a[a[2]] = 122;		//set a[3] to 122
-
-output a[1+2];
-

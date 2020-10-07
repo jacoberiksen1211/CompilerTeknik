@@ -1,0 +1,13 @@
+// array w/ expression support test
+// expected result: a[3] contains 122, if true, output 1.0
+
+a[1] = 1;		//set a[1] to 1
+a[2] = a[1] + 2;	//set a[2] to 3
+a[1+2] = 122;		//set a[3] to 122
+
+// result checker 
+if (a[3] == 122) {
+	output 1.0;
+} else {
+	output 0.0;
+}

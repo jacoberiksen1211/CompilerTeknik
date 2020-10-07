@@ -1,0 +1,12 @@
+// binop association test
+// expected result: satisfy if condition and output 1.0
+
+a=4;
+b=3;
+c=3;
+
+if (a > b && b <= c && a!=b) {
+	output 1.0;
+} else {
+	output 0.0;
+}
